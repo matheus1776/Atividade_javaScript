@@ -1,36 +1,52 @@
-var listaProdutos = [];
-var produto = '';
+/*var resultado = '';
 
-            do {
-                produto = prompt('Informe um produto:');
+function mostrarMensagem(texto,nome) {
+	alert(texto + nome);
+}
 
-		//se não for igual a vázio retorna o que tá entre o if
-        if(produto != "")
+txtCompromisso
+btAdicionar
+
+function efetuarAdicao(valor1,valor2) {
+	return valor1 + valor2;
+}
+
+mostrarMensagem('Exemplo ', 'Giuliano');
+
+resultado = efetuarAdicao(5,4);
+alert(resultado);*/
+
+var listaCompromissos = [];
+var compromisso = '';
+var auxHtml = '';
+
+function identificarCompromisso(novoCompromisso,lista) {
+	var auxExiste = false;
+	for (var j = 0; j < lista.length; j++) {
+		if (novoCompromisso == lista[j])
+			auxExiste = true;
+	}
+	return auxExiste;
+}
+
+window.onload = function() {
+	document.getElementById('btAdicionar').onclick = function() {
+		compromisso = document.getElementById('txtCompromisso').value;
+		if (identificarCompromisso(compromisso, listaCompromissos))
 		{
-			//se for diferente de vázio a variável valido é true.
-            var valido = true;
-					//Corre o array 
-                    for(var i = 0; i < listaProdutos.length; i++)
-					{
-						//continua o laço até que valido fique falso, que será quando 
-                        //valido e listaProdutos[i] não forem iguais a produtos
-                        //valido recebe valido e lista produtos[i] e valido e lista produtos[i]
-                        // é diferente de produto 
-                   		valido = valido && listaProdutos[i] != produto;
-                    }
-            if(valido)
-			{
-                listaProdutos.push(produto);
-            }
-			else
-			{
-                alert("Produto repetido");
-            }
-        }
-
+			alert('O compromisso já foi adicionado!');
+		}
 		else
 		{
-            alert("produto nao pode ser vazio");
-        }
-            } while (confirm('Deseja inserir mais um produto?'));
-			alert(listaProdutos);
+			listaCompromissos.push(compromisso);
+			document.getElementById('txtCompromisso').value = '';
+
+			auxHtml = '';
+			for (var i = 0; i < listaCompromissos.length; i++)
+			{
+				auxHtml += '<li>'+ listaCompromissos[i] +'</li>';
+			}
+			document.getElementById('lsCompromissos').innerHTML = auxHtml;
+		}
+	}
+}
